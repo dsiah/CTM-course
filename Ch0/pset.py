@@ -21,7 +21,7 @@ print({2**i for i in {0,1,2,3,4}})
 print({x*y for x in {1,2,3} for y in {5,6,7}})
 
 # 0.5.8
-print({x*y for x in {0,2,3} for y in {4,6,9} if x != y})
+print({x*y for x in {0,2,3} for y in {4,6,9}})
 
 # 0.5.9
 print({x for x in {1,2,3,4} for y in {3,4,5,6} if x == y})
@@ -144,3 +144,18 @@ def listrange2Dict(L): return {i:j for (i, j) in zip(range(len(L)), L)}
 for i in [1,2,3]:
 	y = i * i
 	print(y)
+
+# 0.8.1
+def increments(L): return [i + 1 for i in L]
+
+# 0.8.2
+def cubes(L): return [i ** 3 for i in L]
+
+# 0.8.3
+def tuple_sum(A, B): return [(A[i][0] + B[i][0], A[i][1] + B[i][1]) for i, aval in enumerate(A)]
+
+# 0.8.4
+def inv_dict(d): return {val:key for key, val in d.items()}
+
+# 0.8.5
+def row(p, n): return [p + i for i in range(n)]
