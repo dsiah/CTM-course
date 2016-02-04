@@ -82,24 +82,22 @@ def get_element_dict(v, D, a):
     return v.get(a, 0)
 
 
-def get_element_list(v, a):
+def get_element_list(v, k):
     '''
         v: vector to get element from
-        a: the key you are looking for, will be zero-index int
+        k: the key you are looking for, will be zero-index int
     '''
-    return v[a]
+    return v[k]
 
-
-
-def get_element_dict(v, a):
+def get_element_dict(v, k):
     '''
         v: vector to get element from
-        a: the key you are looking for
+        k: the key you are looking for
 
         Note: the get method will return 0
         for a value not contained in the dictionary (sparse)
     '''
-    return v.get(a, 0)
+    return v.get(k, 0)
 
 def set_element_list(v, k, a):
     if (k >= len(v) or k < 0):
@@ -107,8 +105,7 @@ def set_element_list(v, k, a):
         
     v[k] = a
 
-def set_element_dict(v, k, a):
-    v[k] = a
+def set_element_dict(v, k, a): v[k] = a
 
 def set_element_dict(v, D, d, a):
     if d not in D:
@@ -116,9 +113,19 @@ def set_element_dict(v, D, d, a):
 
     v[d] = a
 
+def dot_product_lists(v, w):
+    '''
+        Return the dot product of two list-form vectors
+        over the Field of Real numbers
+        v: (list)
+        w: (list)
+    '''
+    if len(v) != len(w):
+        raise KeyError
+
+    return [x * y for (x, y) in zip(v, w)]
+
 if __name__ == '__main__':
-    # set_element_dict({}, [0, 1, 2, 3], 4,   1)
-    # set_element_dict({}, [0, 1, 2, 3], '3', 1)
     a = {}
     set_element_dict(a, range(4), 3, 1)
     print(a)
