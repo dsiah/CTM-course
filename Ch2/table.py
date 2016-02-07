@@ -105,7 +105,8 @@ def set_element_list(v, k, a):
         
     v[k] = a
 
-def set_element_dict(v, k, a): v[k] = a
+def set_element_dict(v, k, a): 
+    v[k] = a
 
 def set_element_dict(v, D, d, a):
     if d not in D:
