@@ -70,6 +70,22 @@ def find_average_record(sen_set, voting_dict):
 	# Sum vectors using add vector function with reduction function and average
 	return [i / len(sen_set) for i in reduce(add, [voting_dict[i] for i in sen_set])]
 
+# Task 2.16.9
+def bitter_rivals(voting_dict):
+	vd, sens = voting_dict, list(voting_dict.keys())
+	rivals   = (None, None, 41) # 40 is largest possible similarity
+
+	for i in range(len(sens)):
+		for j in range(i + 1, len(sens)):
+			# Create tuple with the senators and their similarity index
+			index = (sens[i], sens[j], policy_compare(sens[i], sens[j], vd))
+			# Gets mininum between current rivals and current comparison
+			# Lambda a: a[2] is a function that allows min to compare inner
+			# tuple values
+			rivals = min([rivals, index], key=lambda a: a[2])
+	
+	return rivals
+
 if __name__ == '__main__':
 	mylist = list(open('voting_record_dump109.txt')) # Open file into list form
 	vd = create_voting_dict(mylist)                  # Creating Voting Dictionary
@@ -103,10 +119,15 @@ if __name__ == '__main__':
 
 	sims = [(p, find_average_similarity(p, dems, vd)) for p in allp] 
 	most_dem = max(sims, key=lambda a: a[1])
-	
+
 	print('Most Average D is {} with an (similarity) index of {}'.format(
 		most_dem[0], most_dem[1]))
 
 	dms = most_similar_to(dave, vd) # Most similar to the average Democratic voting
 	print('Most Average D is {} with an (similarity) index of {}'.format(dms[0], dms[1]))
+
+	# Task 2.12.9
+	rivalA, rivalB, diff = bitter_rivals(vd)
+	ans = '{} and {} are the most disimilar senators with an index of {}'
+	print(ans.format(rivalA, rivalB, diff))
 	
