@@ -26,6 +26,7 @@ def smult(a, v):
             - a is the scalar 
             - v is the vector
     '''
+
     return [i * a for i in v]
 
 def vzero(n):
