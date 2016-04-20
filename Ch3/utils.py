@@ -11,7 +11,6 @@ def vadd(v, w):
         Vector addition (vectors must be same length)
             - v is the first vector 
             - w is the second vector
-
     '''
     if type(v) is not list or type(w) is not list:
     	raise TypeError('Input was not a lists')
@@ -19,6 +18,11 @@ def vadd(v, w):
         raise LengthError('{} and {} must be equal in length'.format(v, w))
 
     return [i + j for (i, j) in zip(v, w)]
+
+
+def madd(v, w):
+    return [vadd(v[i], w[i]) for i in range(len(v))]
+
 
 def smult(a, v):
     '''
@@ -38,33 +42,51 @@ def vzero(n):
 
     return [0 for i in range(n)]
 
+
+def mzero(m, n):
+    '''
+        Return a matrix of m by n 0s
+    '''
+    return [vzero(n) for row in range(m)]
+
+
 def vneg(v):
 	'''
 		Return additive inverse of V 
 			In this case, we are dealing with vectors over the Real numbers
 			so, it is all the negative numbers
 	'''
-	if type(v) is not list:
-		raise TypeError('Input was not a list')
 
 	return [-1 * i for i in v]
+
+
+def mneg(m):
+    return [vneg(row) for row in m]
+
 
 def dot(v, w):
     '''
         Return the dot product of two vectors v & w
     '''
-    if type(v) is not list or type(w) is not list:
-    	raise TypeError('Input was not a lists')
-    elif len(v) != len(w):
-        raise LengthError('{} and {} must be equal in length'.format(v, w))
-
     return sum([i * j for (i, j) in zip(v, w)])
     
 def sbasis(j, n):
     '''
         Create vector of length n with a 1 in the jth position
     '''
-    return [1 if (i == j - 1) else 0 for i in range(n)]
+    return [1 if (i == j) else 0 for i in range(n)]
+
+def ID(n):
+    '''
+        Return square identity matrix n by n
+    '''
+    return [sbasis(i, n) for i in range(n)]
+
+def shape(m):
+    '''
+        Return a list describing the row by col dimensions of this matrix m
+    '''
+    return [len(m), len(m[0])]
 
 def vsum(vlist):
     '''
